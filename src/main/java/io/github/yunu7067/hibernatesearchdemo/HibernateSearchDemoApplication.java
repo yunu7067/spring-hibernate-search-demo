@@ -9,5 +9,4 @@ public class HibernateSearchDemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(HibernateSearchDemoApplication.class, args);
     }
-
 }

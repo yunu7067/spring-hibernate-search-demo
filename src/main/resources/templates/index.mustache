@@ -13,6 +13,7 @@
       align-items: center;
       justify-content: center;
     }
+
     main {
       display: flex;
       align-items: flex-start;
@@ -26,9 +27,11 @@
       padding: 1.5rem;
       box-sizing: border-box;
     }
+
     .container:first-child {
       width: 800px;
     }
+
     .container:last-child {
       width: 500px;
     }
@@ -48,6 +51,7 @@
     button[type="submit"] {
       padding: 0.25rem 0.5rem;
     }
+
     ul {
       list-style: none;
       padding: 0;
@@ -58,15 +62,25 @@
 <body>
 <main>
   <div class="container">
+    <div>
+      <label>
+        검색
+        <input type="text" placeholder="Search post" onkeyup="SearchPost(this)">
+      </label>
+    </div>
+    <h3>검색 목록</h3>
+    <ul id="search-container">
+    </ul>
     <h3>게시글 상세</h3>
     <ul>
       {{#posts}}
         <li>
-          [{{id}}] {{title}}<br>
+          [{{id}}] {{title}} -
           {{content}}
         </li>
       {{/posts}}
     </ul>
+
   </div>
   <div class="container">
     <h3>게시글 작성</h3>
@@ -86,4 +100,45 @@
   </div>
 </main>
 </body>
+
+<script>
+
+  function appendPostList(posts) {
+    const searchContainerEl = document.getElementById('search-container');
+    Array.from(searchContainerEl.children).map((el)=>el.remove());
+
+    posts.map((post) => {
+      const postEl = document.createElement("li");
+      postEl.textContent = `[${post.id}] ${post.title} - ${post.content}`;
+      searchContainerEl.append(postEl);
+    })
+  }
+
+
+  /* Search Post */
+  let searchEventId = 0;
+  let prevEventKeyword;
+
+  function SearchPost(el) {
+    const keyword = el.value;
+    if (prevEventKeyword === keyword || keyword.replaceAll(" ", '') === "")
+      return;
+
+    prevEventKeyword = keyword;
+    if (!!searchEventId) {
+      clearTimeout(searchEventId)
+    }
+    searchEventId = setTimeout(() => {
+      console.log(`search ${searchEventId}`);
+      fetch(`/post/search?keyword=${keyword}`)
+          .then((result) => result.json())
+          .then((data) => {
+            console.log(data)
+            appendPostList(data);
+          })
+    }, 500);
+  }
+
+</script>
+
 </html>

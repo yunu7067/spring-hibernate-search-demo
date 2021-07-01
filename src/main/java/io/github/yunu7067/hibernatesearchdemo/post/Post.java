@@ -1,24 +1,29 @@
 package io.github.yunu7067.hibernatesearchdemo.post;
 
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+
 import javax.persistence.*;
 
 @Table(name = "post")
 @Entity
+@Indexed
 public class Post {
     @Id
     @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @FullTextField
     @Column(name = "title", nullable = false)
     private String title;
 
+    @FullTextField
     @Column(name = "content", nullable = false)
     private String content;
 
 
     public Post() {
-
     }
 
     public Post(String title, String content) {
