@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hibernate Search Demo</title>
+
+  <style>
+    body {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    main {
+      display: flex;
+      align-items: flex-start;
+      justify-content: stretch;
+      gap: 2rem;
+    }
+
+    .container {
+      border: 1px solid #6d6d6d;
+      border-radius: 0.25rem;
+      padding: 1.5rem;
+      box-sizing: border-box;
+    }
+    .container:first-child {
+      width: 800px;
+    }
+    .container:last-child {
+      width: 500px;
+    }
+
+    form#post-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      padding: 0.25rem 0.5rem;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+  </style>
+</head>
+<body>
+<main>
+  <div class="container">
+    <h3>게시글 상세</h3>
+    <ul>
+      {{#posts}}
+        <li>
+          [{{id}}] {{title}}<br>
+          {{content}}
+        </li>
+      {{/posts}}
+    </ul>
+  </div>
+  <div class="container">
+    <h3>게시글 작성</h3>
+    <form id="post-form" action="/post" method="post">
+      <label>
+        제목
+        <input type="text" name="title" maxlength="256" required>
+      </label>
+      <label>
+        내용
+        <textarea rows="8" name="content" required></textarea>
+      </label>
+      <div>
+        <button type="submit">업로드</button>
+      </div>
+    </form>
+  </div>
+</main>
+</body>
+</html>
