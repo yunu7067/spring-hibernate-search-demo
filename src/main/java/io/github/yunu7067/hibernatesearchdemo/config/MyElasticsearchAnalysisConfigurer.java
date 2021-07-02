@@ -24,11 +24,12 @@ public class MyElasticsearchAnalysisConfigurer implements ElasticsearchAnalysisC
         context.normalizer("lowercase").custom()
                 .tokenFilters("lowercase", "asciifolding");
 
-        System.out.println("DEFINE a NEW ANALYZER:DONE");
-
         /* Korean Analysis */
         context.analyzer("korean").custom()
                 .tokenizer("nori_tokenizer")
-                .tokenFilters("lowercase", "nori_part_of_speech", "nori_readingform");
+                .charFilters("html_strip")
+                .tokenFilters("lowercase", "nori_part_of_speech", "nori_number", "nori_readingform");
+
+        System.out.println("DEFINE a NEW ANALYZER:DONE");
     }
 }
