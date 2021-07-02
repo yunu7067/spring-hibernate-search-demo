@@ -18,3 +18,6 @@ spring:
             uris: http://localhost:9200
             username: elastic
             password: 8t8GYcM1oVT1DOjVBKAP
+            analysis:
+              configurer: class:io.github.yunu7067.hibernatesearchdemo.config.MyElasticsearchAnalysisConfigurer
+

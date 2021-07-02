@@ -29,8 +29,6 @@ public class HibernateSearchService {
                         .matching(keyword)
                 )
                 .fetch(20);
-        var totalHitCount = result.total().hitCount();
-        var hits = result.hits();
 
         return result;
     }

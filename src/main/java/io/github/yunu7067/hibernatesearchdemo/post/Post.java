@@ -14,12 +14,12 @@ public class Post {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @FullTextField
-    @Column(name = "title", nullable = false)
+    @FullTextField(analyzer = "english")
+    @Column(name = "title", nullable = false, length = 1024)
     private String title;
 
-    @FullTextField
-    @Column(name = "content", nullable = false)
+    @FullTextField(analyzer = "english")
+    @Column(name = "content", nullable = false, length = 10240)
     private String content;
 
 
