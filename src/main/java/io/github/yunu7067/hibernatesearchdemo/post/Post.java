@@ -14,11 +14,11 @@ public class Post {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @FullTextField(analyzer = "english")
+    @FullTextField(analyzer = "korean")
     @Column(name = "title", nullable = false, length = 1024)
     private String title;
 
-    @FullTextField(analyzer = "english")
+    @FullTextField(analyzer = "korean")
     @Column(name = "content", nullable = false, length = 10240)
     private String content;
 
